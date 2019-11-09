@@ -1,8 +1,5 @@
 var express = require('express')
 var app = express()
-
-var port = process.env.PORT || 4000
-
 var mongoose        = require('mongoose')
 var bodyParser      = require("body-parser")
 var methodOverride  = require("method-override")
@@ -11,6 +8,17 @@ var LocalStrategy   = require("passport-local")
 var db              = require("./models")
 var User            = require("./models/user")
 
+var port = process.env.PORT || 4000
+
+var educationRoutes = require("./routes/education")
+var workExpRoutes = require("./routes/workExp")
+
+app.use("/api/education", educationRoutes)
+app.use("/api/work", workExpRoutes)
+
+app.get("/xyz", function(req, res){
+    res.send("sent xyz from app")
+})
 
 app.use(bodyParser.urlencoded({extended: true}));
 
