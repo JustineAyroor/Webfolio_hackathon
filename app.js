@@ -69,12 +69,13 @@ app.post("/register", function(req, res){
             avatar: req.body.avatar,
             phone: req.body.phone
         });
+        console.log(req.body.password)
     if(req.body.adminCode === 'halkahalka1234'){
         newUser.isAdmin = true;
     }
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            //console.log(err);
+            console.log(err);
             return res.render("register", {error: err.message});
         }
         passport.authenticate("local")(req, res, function(){
@@ -95,7 +96,7 @@ app.get("/home", function(req, res){
 app.get('/home/:id', function(req, res) {
     User.findById(req.params.id, function(err, foundUser){
        if(err){
-           req.flash("error", "User Profile Not Found");
+        //    req.flash("error", "User Profile Not Found");
            res.redirect("/");
        }
        res.render("show", {user: foundUser});
@@ -106,7 +107,7 @@ app.get('/home/:id', function(req, res) {
 // logout route
 app.get("/logout", function(req, res){
     req.logout();
-    req.flash("success", "LOGGED YOU OUT!!");
+    // req.flash("success", "LOGGED YOU OUT!!");
     res.redirect("/");
  });
 
