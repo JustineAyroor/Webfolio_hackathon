@@ -7,6 +7,6 @@ app.get("/", function(req, res){
     res.send("Hello Welcome to webfolio")
 })
 
-app.listen(4000, function(){
+app.listen(port, function(){
     console.log("App running")
 })
