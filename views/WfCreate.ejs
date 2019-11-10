@@ -1,7 +1,7 @@
 <% include ./partials/header %>
 <div class="container">
     <div class="row">
-        <div style="width: 30%; margin: 25px auto;" class="bg-dark">
+        <div style="height:100%; width: 30%; margin: 25px auto;" class="bg-dark">
             <h1 class="text-center text-light">Create WebFolio</h1>
             <form action="/register" method="POST">
 
@@ -25,22 +25,23 @@
                 <div class="form-group mx-1">
                     <select class="form-control" type="text" name="font_body" onchange="show_value(this.value);" placeholder="Body Font Styles" required>
                     <option value="">--Please choose an option--</option>
+                    </select>
                 </div>
                 <div class="form-group mx-1">
-                    <select class="form-control" type="text" name="font_title" onchange="show_value(this.value);" placeholder="Title Font Style" required>
+                    <select class="form-control" type="text" name="font_title" onchange="show_value(this.value);" placeholder="Body Font Styles" required>
                     <option value="">--Please choose an option--</option>
+                    </select>
                 </div>
                 <div class="form-group mx-1">
-                    <select class="form-control" type="text" name="font_header" onchange="show_value(this.value);" placeholder="Header Font Style ">
+                    <select class="form-control" type="text" name="font_header" onchange="show_value(this.value);" placeholder="Header Font Style " required>
                     <option value="">--Please choose an option--</option>
+                    </select>
                 </div>
                 <div class="form-group mx-1">
-                    <select class="form-control" type="text" name="font_quotes" onchange="show_value(this.value);" placeholder="Quote Font Style">
+                    <select class="form-control" type="text" name="font_quote" onchange="show_value(this.value);" placeholder="Body Font Styles" required>
                     <option value="">--Please choose an option--</option>
+                    </select>
                 </div>
-                <!-- <div class="form-group mx-1">
-                    <select class="form-control" type="Number" name="age" placeholder="Age">
-                </div> -->
                 <div class="form-group mx-1">
                     <button class="btn btn-lg btn-success btn-block">Sign Up!</button>
                 </div>

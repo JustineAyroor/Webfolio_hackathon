@@ -166,8 +166,13 @@ app.use("/api/tskill", tskillRoutes)
 app.use("/api/certifications", certificationRoutes)
 app.use("/api/fonts", fontsRoutes)
 
-app.get("/xyz", function(req, res){
-    res.render("defaultwebfolio")
+app.get("/show", function(req, res){
+    res.render("WfCreate")
+})
+
+app.get("/vinays_data", function(req, res){
+    console.log(req.body.data)
+    res.send(req.body.data)
 })
 
 app.listen(port, function(){
