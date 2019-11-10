@@ -221,6 +221,8 @@ app.post("/pdCreate", function(req, res){
     })
 })
 
+
+// Edudcation Route
 app.get("/createEducation/:wfID", function(req, res){
     console.log(req.params.wfID)
     res.render("createEducation", {wfID: req.params.wfID})
@@ -257,6 +259,11 @@ app.post("/createEducation/:wfID", function(req, res){
     .catch(function(err){
         console.log(err)
     })
+})
+
+// Parser Route
+app.post("/fetch_data/:user_id", function(req, res){
+    console.log(req.body.data)
 })
 
 app.listen(port, function(){
