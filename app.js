@@ -170,9 +170,10 @@ app.get("/show", function(req, res){
     res.render("WfCreate")
 })
 
-app.get("/vinays_data", function(req, res){
-    console.log(req.body)
-    res.send(req.body)
+app.get("/vinays_data/:id/:parsed_data", function(req, res){
+    console.log(req.params.id)
+    console.log(req.params.parsed_data)
+    res.send("ok")
 })
 
 app.listen(port, function(){
