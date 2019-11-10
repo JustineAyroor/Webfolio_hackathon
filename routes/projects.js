@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var db = require("../models")
-var helpers = require("../helpers/project")
+var helpers = require("../helpers/projects")
 
 
 router.route("/:wfID")
