@@ -109,17 +109,25 @@ app.get("/logout", function(req, res){
     res.redirect("/");
  });
 
+ // Add font route
+ app.post("/font", function(req, res){
+     db.Fonts.create({name: req.body.font_name})
+     .then(function(font){
+         res.send("Font added "+font)
+     })
+     .catch(function(err){
+         res.send(err)
+     })
+ })
+
 // routers 
 var personalDetailsRoutes = require("./routes/personalDetails")
 var educationRoutes = require("./routes/education")
+var webFolioRoutes = require("./routes/webFolio")
 
 app.use("/api/education", educationRoutes)
 app.use("/api/personalDetails", personalDetailsRoutes)
-
-app.get("/xyz", function(req, res){
-    res.send("sent xyz from app")
-})
-
+app.use("/api/webFolio", webFolioRoutes)
 
 app.listen(port, function(){
     console.log("App running")

@@ -28,10 +28,10 @@ var webFolioSchema = new mongoose.Schema({
             type: String,
             default: "https://www.solidbackgrounds.com/images/950x350/950x350-light-blue-solid-color-background.jpg"
         },
-        font_body:{type:mongoose.Schema.ObjectId, ref:"Fonts"},
-        font_title: {type:mongoose.Schema.ObjectId, ref:"Fonts"},
-        font_header: {type:mongoose.Schema.ObjectId, ref:"Fonts"},
-        font_quotes: {type:mongoose.Schema.ObjectId, ref:"Fonts"}
+        font_body: String,
+        font_title: String,
+        font_header: String,
+        font_quotes: String
     }
 })
 

@@ -18,7 +18,13 @@ exports.pdPush = function(req, res){
             title: req.body.title,
             objective: req.body.objective,
             linkdn: req.body.linkdn,
-            git: req.body.git
+            git: req.body.git,
+            basic_wf_styles:{
+                font_body: req.body.font_body,
+                font_title: req.body.font_title,
+                font_header: req.body.font_header,
+                font_quotes: req.body.font_quotes
+            }
         })
         .then(function(WebFolio){
                 res.send(WebFolio)
@@ -39,7 +45,7 @@ exports.pdPut = function(req, res){
             objective: req.body.objective,
             linkdn: req.body.linkdn,
             git: req.body.git
-    })
+    }, {new: true})
     .then(function(webFolio){
         res.send(webFolio)
     })

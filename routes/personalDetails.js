@@ -3,8 +3,8 @@ var router = express.Router()
 var helpers = require('../helpers/personalDetails')
 
 router.route("/:id")
-    .get(helpers.pdView)
-    .post(helpers.pdPush)
-    .put(helpers.pdPut)
+    .get(helpers.pdView) // pass in webfolio id
+    .post(helpers.pdPush) // pass in user id
+    .put(helpers.pdPut) // pass webfolio id
 
 module.exports = router;
