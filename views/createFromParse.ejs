@@ -22,49 +22,10 @@
                 <div class="form-group mx-1">
                     <input class="form-control" type="text" name="linkdn" placeholder="GitHub Link" value="<%= parserObj.URLS[0] %>" required>
                 </div>
-            
                 <hr class="bg-warning">
                 <h3 class="text-white text-center">Font Styles</h3>
                 <hr class="bg-warning">
                 <div class></div>
-                <div class="form-group mx-1">
-                    <p id="font_body" class="text-light">Body Font</p>
-                    <select class="form-control" type="text" name="font_body" placeholder="Body Font Styles" required>
-                    <option value="">--Please choose an option--</option>
-                    <% fonts.forEach(function(font){ %>
-                        <option value="<%=font.name %>"><%= font.name %></option>
-                    <% }) %>
-                    </select>
-                </div>
-                <div class="form-group mx-1">
-                    <p id="font_title" class="text-light">Title Font</p>
-                    <select class="form-control" type="text" name="font_title" placeholder="Title Font Style" required>
-                    <option value="">--Please choose an option--</option>
-                    <% fonts.forEach(function(font){ %>
-                        <option value="<%=font.name %>"><%= font.name %></option>
-                    <% }) %>
-                    </select>
-                </div>
-                <div class="form-group mx-1">
-                        <p id="font_header" class="text-light">Header Font</p>
-                        <select class="form-control" type="text" name="font_header" placeholder="Header Font Styles" required>
-                        <option value="">--Please choose an option--</option>
-                        <% fonts.forEach(function(font){ %>
-                            <option value="<%=font.name %>"><%= font.name %></option>
-                        <% }) %>
-                        </select>
-                    </div>
-                    <div class="form-group mx-1">
-                        <p id="font_quotes" class="text-light">Quote Font</p>
-                        <select class="form-control" type="text" name="font_quotes" placeholder="Quotes Font Style" required>
-                        <option value="">--Please choose an option--</option>
-                        <% fonts.forEach(function(font){ %>
-                            <option value="<%=font.name %>"><%= font.name %></option>
-                        <% }) %>
-                        </select>
-                    </div>
-        
-                <hr class="bg-warning">
                 <div class="form-group mx-1">
                     <button class="btn btn-lg btn-success btn-block">Submit</button>
                 </div>
