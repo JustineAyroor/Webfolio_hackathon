@@ -4,4 +4,4 @@ var fontSchema = new mongoose.Schema({
     name: String
 })
 
-module.exports(fontSchema, "Fonts")
+module.exports = mongoose.model("Fonts",fontSchema)

@@ -6,3 +6,5 @@ mongoose.connect('mongodb://justine:justine1234@ds241258.mlab.com:41258/heroku_v
 mongoose.Promise = Promise; 
 
 module.exports.User = require("./user")
+module.exports.WebFolio = require("./webfolio")
+module.exports.Education = require("./education")

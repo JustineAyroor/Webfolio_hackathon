@@ -10,8 +10,14 @@ var User            = require("./models/user")
 
 var port = process.env.PORT || 4000
 
+
 var educationRoutes = require("./routes/education")
 var workExpRoutes = require("./routes/workExp")
+
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(methodOverride("_method"));
 
 app.use("/api/education", educationRoutes)
 app.use("/api/work", workExpRoutes)
@@ -19,10 +25,6 @@ app.use("/api/work", workExpRoutes)
 app.get("/xyz", function(req, res){
     res.send("sent xyz from app")
 })
-
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.use(methodOverride("_method"));
 
 app.use(require("express-session")({
     secret: "Lets Build at HACK-NJIT",
