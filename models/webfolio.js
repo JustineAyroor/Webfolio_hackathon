@@ -8,6 +8,7 @@ var webFolioSchema = new mongoose.Schema({
     git: String,
     education: [{type:mongoose.Schema.ObjectId, ref:"Education"}],
     workExp: [{type:mongoose.Schema.ObjectId, ref:"WorkExp"}],
+    project: [{type:mongoose.Schema.ObjectId, ref:"Project"}],
     tSkills: [
             {
                 name: String, 
