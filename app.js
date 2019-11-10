@@ -102,7 +102,7 @@ app.get('/home/:id', function(req, res) {
                 res.render("show", {user: foundUser, isCreated: isCreated});
                }else{
                 var isCreated = true
-                res.render("show", {user: foundUser, isCreated: isCreated});
+                res.render("show", {user: foundUser, isCreated: isCreated,wfid: req.param.wfid});
                }
            })
        }
@@ -130,6 +130,7 @@ app.put("/home/:id", function(req, res) {
         res.redirect("/home/" + updatedUser.id);
     });
 });
+
 // logout route
 app.get("/logout", function(req, res){
     req.logout();
@@ -146,6 +147,28 @@ app.get("/logout", function(req, res){
          res.send(err)
      })
  })
+
+ app.get("/:id/createWf", function(req, res){
+    db.Fonts.find({})
+    .then(function(fonts){
+        res.render("WfCreate", {fonts: fonts})
+    })
+})
+
+app.post("/:id/createWf", function(req, res){
+    res.send("Logic Goes Here")
+})
+
+app.get("/:id/viewWf/:wfID", function(req, res){
+    db.WebFolio.findById(req.params.wfID).populate({path: "user"}).populate({path: "education"}).populate({path: "workExp"}).populate({path: "project"})
+    .then(function(wf){
+        res.render("defaultwebfolio", {wf:wf})
+    })
+    .catch(function(err){
+        console.log(err)
+    })    
+})
+
 
 // routers 
 var personalDetailsRoutes = require("./routes/personalDetails")
