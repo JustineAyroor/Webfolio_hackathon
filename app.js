@@ -128,6 +128,7 @@ var workExpRoutes = require("./routes/workExp")
 var projectsRoutes = require("./routes/projects")
 var tskillRoutes = require("./routes/tskills")
 var certificationRoutes = require("./routes/certifications")
+var fontsRoutes = require("./routes/fonts")
 
 app.use("/api/personalDetails", personalDetailsRoutes)
 app.use("/api/webFolio", webFolioRoutes)
@@ -136,6 +137,7 @@ app.use("/api/workExp", workExpRoutes)
 app.use("/api/project", projectsRoutes)
 app.use("/api/tskill", tskillRoutes)
 app.use("/api/certifications", certificationRoutes)
+app.use("/api/fonts", fontsRoutes)
 
 app.get("/xyz", function(req, res){
     res.send("sent xyz from app")
