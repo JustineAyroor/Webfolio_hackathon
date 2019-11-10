@@ -171,8 +171,7 @@ app.get("/show", function(req, res){
 })
 
 app.post("/vinays_data/:id", function(req, res){
-    console.log(req.params.id)
-    console.log(req.body)
+    console.log(req)
     res.send("ok")
 })
 
