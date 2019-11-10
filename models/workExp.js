@@ -12,4 +12,4 @@ var workExpSchema = new mongoose.Schema({
     }
 })
 
-module.exports(workExpSchema, "WorkExp")
+module.exports = mongoose.model("WorkExp", workExpSchema)

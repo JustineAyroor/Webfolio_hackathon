@@ -7,11 +7,7 @@ var educationScehma = new mongoose.Schema({
     isCurr: Boolean,
     major: String,
     gpa: String,
-    courses: [
-        {
-            name: String
-        }
-    ]
+    courses: [String]
 })
 
-module.exports = mongoose.model(educationScehma, "Education")
+module.exports = mongoose.model("Education", educationScehma)
