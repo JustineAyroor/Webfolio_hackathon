@@ -8,3 +8,5 @@ mongoose.Promise = Promise;
 module.exports.User = require("./user")
 module.exports.WebFolio = require("./webfolio")
 module.exports.Education = require("./education")
+module.exports.WorkExp = require("./workExp")
+module.exports.Project = require("./project")

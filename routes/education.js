@@ -6,12 +6,12 @@ var helpers = require("../helpers/education")
 // var Education = require("../models/education")
 
 router.route("/:wfID")
-    .get(helpers.getWebFolioEdu)
-    .post(helpers.createWebFolioEdu)
+    .get(helpers.getWebFolioEdu) // pass WF_ID 
+    .post(helpers.createWebFolioEdu) // pass WF_ID 
 
 router.route("/:wfID/:eduID")
-    .get(helpers.getOneWebFolioEdu)
-    .put(helpers.updateWebFolioEdu)
-    .delete(helpers.delWebFolioEdu)
+    .get(helpers.getOneWebFolioEdu) // pass WF_ID and Edu_ID
+    .put(helpers.updateWebFolioEdu) // pass WF_ID and Edu_ID
+    .delete(helpers.delWebFolioEdu) // pass WF_ID and Edu_ID
 
 module.exports = router;

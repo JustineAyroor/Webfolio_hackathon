@@ -112,9 +112,13 @@ app.get("/logout", function(req, res){
 // routers 
 var personalDetailsRoutes = require("./routes/personalDetails")
 var educationRoutes = require("./routes/education")
+var workExpRoutes = require("./routes/workExp")
+var projectsRoutes = require("./routes/workExp")
 
-app.use("/api/education", educationRoutes)
 app.use("/api/personalDetails", personalDetailsRoutes)
+app.use("/api/education", educationRoutes)
+app.use("/api/workExp", workExpRoutes)
+app.use("/api/project", projectsRoutes)
 
 app.get("/xyz", function(req, res){
     res.send("sent xyz from app")

@@ -43,7 +43,7 @@ exports.createWebFolioEdu = function(req, res){
 }
 
 exports.updateWebFolioEdu = function(req, res){
-    db.Education.findByIdAndUpdate(req.params.eduID, req.body)
+    db.Education.findByIdAndUpdate(req.params.eduID, req.body, {new: true})
     .then(function(EduIdShow){
         res.json(EduIdShow)
     })
