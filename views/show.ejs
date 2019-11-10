@@ -15,6 +15,7 @@
                         <div class="caption">EMAIL ID:<a class="text-success" href="mailto:<%= user.email %>"> <%= user.email %></a></div>
                         <div class="caption" class="text-success"><h3>PHONE: <%= user.phone %></h3></div>
                         <div class="caption" class="text-success"><h3>Age: <%= user.age %> </h3></div>
+                        <h6>Account Settings</h6>
                         <div class= "d-inline-flex p-2 bd-highlight bg-success">
                             <a class="btn btn-xs btn-warning m-2" href="/home/<%= user._id %>/edit/"><i class="fas fa-edit"></i></a>
                             <form class="delete-form m-2" action="/home/<%= user._id %>?_method=DELETE" method="POST">
@@ -34,7 +35,7 @@
             <div class="card-header">Create Your WebFolio</div>
             <div class="card-body">
                 <p> You have 2 Options to build your PortFolio.</p>
-                <a href="#" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="true">Manual</a>
+                <a href="/<%= user._id %>/createWf" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="true">Manual</a>
                 <a href="#" class="btn btn-danger btn-sm" tabindex="-1" role="button" aria-disabled="true">Resume Parser</a>
             </div>
         </div>
@@ -42,7 +43,7 @@
         <div class="card text-center bg-light mb-3" style="max-width: 100%;">
             <div class="card-header">Actions</div>
             <div class="card-body">
-                <a href="#" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="true">View WebFolio</a>
+                <a href="/<%= user._id %>/viewWf/<%= wfid %>" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="true">View WebFolio</a>
             </div>
         </div>
     <% } %>
