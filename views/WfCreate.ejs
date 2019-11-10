@@ -1,0 +1,58 @@
+<% include ./partials/header %>
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;" class="bg-dark">
+            <h1 class="text-center text-light">Create WebFolio</h1>
+            <form action="/register" method="POST">
+
+                <h3 class="text-white text-center">Basic Info</h3>
+                <hr class="text-warning">
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="title" placeholder="title" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="objective" placeholder="Objective" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="linkdn" placeholder="Linkedn Link" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="git" placeholder="GitHub Link" required>
+                </div>
+
+                <h3 class="text-white text-center">Font Styles</h3>
+                <hr class="text-warning">
+                <div class="form-group mx-1">
+                    <select class="form-control" type="text" name="font_body" onchange="show_value(this.value);" placeholder="Body Font Styles" required>
+                    <option value="">--Please choose an option--</option>
+                </div>
+                <div class="form-group mx-1">
+                    <select class="form-control" type="text" name="font_title" onchange="show_value(this.value);" placeholder="Title Font Style" required>
+                    <option value="">--Please choose an option--</option>
+                </div>
+                <div class="form-group mx-1">
+                    <select class="form-control" type="text" name="font_header" onchange="show_value(this.value);" placeholder="Header Font Style ">
+                    <option value="">--Please choose an option--</option>
+                </div>
+                <div class="form-group mx-1">
+                    <select class="form-control" type="text" name="font_quotes" onchange="show_value(this.value);" placeholder="Quote Font Style">
+                    <option value="">--Please choose an option--</option>
+                </div>
+                <!-- <div class="form-group mx-1">
+                    <select class="form-control" type="Number" name="age" placeholder="Age">
+                </div> -->
+                <div class="form-group mx-1">
+                    <button class="btn btn-lg btn-success btn-block">Sign Up!</button>
+                </div>
+            </form>
+            <a href="/" class="btn btn-lg btn-danger btn-block">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function show_value(val) {
+        alert(val);
+    }
+</script>
+<% include ./partials/footer %>
