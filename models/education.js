@@ -9,10 +9,9 @@ var educationScehma = new mongoose.Schema({
     gpa: String,
     courses: [
         {
-            name: String,
-            grade: String
+            name: String
         }
     ]
 })
 
-module.exports(educationScehma, "Education")
+module.exports = mongoose.model(educationScehma, "Education")

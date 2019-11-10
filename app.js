@@ -10,16 +10,6 @@ var User            = require("./models/user")
 
 var port = process.env.PORT || 4000
 
-var educationRoutes = require("./routes/education")
-var workExpRoutes = require("./routes/workExp")
-
-app.use("/api/education", educationRoutes)
-app.use("/api/work", workExpRoutes)
-
-app.get("/xyz", function(req, res){
-    res.send("sent xyz from app")
-})
-
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(methodOverride("_method"));
@@ -117,6 +107,18 @@ app.get("/logout", function(req, res){
     req.flash("success", "LOGGED YOU OUT!!");
     res.redirect("/");
  });
+
+// routers 
+var personalDetailsRoutes = require("./routes/personalDetails")
+
+// app.use("/api/education", educationRoutes)
+// app.use("/api/work", workExpRoutes)
+app.use("/api/personalDetails", personalDetailsRoutes)
+
+app.get("/xyz", function(req, res){
+    res.send("sent xyz from app")
+})
+
 
 app.listen(port, function(){
     console.log("App running")

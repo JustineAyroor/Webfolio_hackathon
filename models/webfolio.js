@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
 
-var webFolioSchema = mongoose.Schema({
+var webFolioSchema = new mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref:"User"},
     title: String,
     objective: String,
@@ -35,4 +35,4 @@ var webFolioSchema = mongoose.Schema({
     }
 })
 
-module.exports(webFolioSchema, "WebFolio")
+module.exports = mongoose.model("WebFolio", webFolioSchema)
