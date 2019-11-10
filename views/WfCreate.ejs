@@ -1,12 +1,12 @@
 <% include ./partials/header %>
 <div class="container">
     <div class="row">
-        <div style="width: 30%; margin: 25px auto;" class="bg-dark">
+        <div style="width: 50%; margin: 25px auto;" class="bg-dark">
             <h1 class="text-center text-light">Create WebFolio</h1>
-            <form action="/register" method="POST">
-
+            <form action="/api/personalDetails" method="POST">
+                <hr class="bg-warning">
                 <h3 class="text-white text-center">Basic Info</h3>
-                <hr class="text-warning">
+                <hr class="bg-warning">
                 <div class="form-group mx-1">
                     <input class="form-control" type="text" name="title" placeholder="title" required>
                 </div>
@@ -20,29 +20,50 @@
                     <input class="form-control" type="text" name="git" placeholder="GitHub Link" required>
                 </div>
 
+                <hr class="bg-warning">
                 <h3 class="text-white text-center">Font Styles</h3>
-                <hr class="text-warning">
+                <hr class="bg-warning">
+                <div class></div>
                 <div class="form-group mx-1">
-                    <select class="form-control" type="text" name="font_body" onchange="show_value(this.value);" placeholder="Body Font Styles" required>
+                    <p id="font_body" class="text-light">Body Font</p>
+                    <select class="form-control" type="text" name="font_body" placeholder="Body Font Styles" required>
                     <option value="">--Please choose an option--</option>
+                    <% fonts.forEach(function(font){ %>
+                        <option value="<%=font.name %>"><%= font.name %></option>
+                    <% }) %>
+                    </select>
                 </div>
                 <div class="form-group mx-1">
-                    <select class="form-control" type="text" name="font_title" onchange="show_value(this.value);" placeholder="Title Font Style" required>
+                    <p id="font_title" class="text-light">Title Font</p>
+                    <select class="form-control" type="text" name="font_title" placeholder="Title Font Style" required>
                     <option value="">--Please choose an option--</option>
+                    <% fonts.forEach(function(font){ %>
+                        <option value="<%=font.name %>"><%= font.name %></option>
+                    <% }) %>
+                    </select>
                 </div>
                 <div class="form-group mx-1">
-                    <select class="form-control" type="text" name="font_header" onchange="show_value(this.value);" placeholder="Header Font Style ">
-                    <option value="">--Please choose an option--</option>
-                </div>
+                        <p id="font_header" class="text-light">Header Font</p>
+                        <select class="form-control" type="text" name="font_header" placeholder="Header Font Styles" required>
+                        <option value="">--Please choose an option--</option>
+                        <% fonts.forEach(function(font){ %>
+                            <option value="<%=font.name %>"><%= font.name %></option>
+                        <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group mx-1">
+                        <p id="font_quotes" class="text-light">Quote Font</p>
+                        <select class="form-control" type="text" name="font_quotes" placeholder="Quotes Font Style" required>
+                        <option value="">--Please choose an option--</option>
+                        <% fonts.forEach(function(font){ %>
+                            <option value="<%=font.name %>"><%= font.name %></option>
+                        <% }) %>
+                        </select>
+                    </div>
+        
+                <hr class="bg-warning">
                 <div class="form-group mx-1">
-                    <select class="form-control" type="text" name="font_quotes" onchange="show_value(this.value);" placeholder="Quote Font Style">
-                    <option value="">--Please choose an option--</option>
-                </div>
-                <!-- <div class="form-group mx-1">
-                    <select class="form-control" type="Number" name="age" placeholder="Age">
-                </div> -->
-                <div class="form-group mx-1">
-                    <button class="btn btn-lg btn-success btn-block">Sign Up!</button>
+                    <button class="btn btn-lg btn-success btn-block">Submit</button>
                 </div>
             </form>
             <a href="/" class="btn btn-lg btn-danger btn-block">Go Back</a>
@@ -50,9 +71,4 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function show_value(val) {
-        alert(val);
-    }
-</script>
 <% include ./partials/footer %>

@@ -34,7 +34,7 @@ exports.createWebFolioEdu = function(req, res){
         .then(function(WFObj){
             WFObj.education.push(eduDets)
             WFObj.save()
-            .then(function(eduDets){res.json(eduDets)})
+            .then(function(educationDets){res.json(eduDets)})
             .catch(function(err){console.log(err)})
         })
         .catch(function(err){console.log(err)})
