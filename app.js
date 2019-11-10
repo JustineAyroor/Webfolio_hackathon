@@ -64,6 +64,7 @@ app.post("/register", function(req, res){
             firstName: req.body.firstName,
             lastName: req.body.lastName, 
             email: req.body.email, 
+            age: req.body.age,
             avatar: req.body.avatar,
             phone: req.body.phone
         });
@@ -85,7 +86,6 @@ app.post("/register", function(req, res){
 
 //Home Route
 app.get("/home", function(req, res){
-    // res.send("This will be the Home Page");
     var user_id = res.locals.currentUser.id;
     console.log(user_id)
     res.redirect("/home/" + user_id);
@@ -94,18 +94,45 @@ app.get("/home", function(req, res){
 app.get('/home/:id', function(req, res) {
     User.findById(req.params.id, function(err, foundUser){
        if(err){
-        //    req.flash("error", "User Profile Not Found");
            res.redirect("/");
+       }else{
+           db.WebFolio.findOne({user: req.params.id}, function(err,Wf){
+               if(Wf == undefined){
+                var isCreated = false
+                res.render("show", {user: foundUser, isCreated: isCreated});
+               }else{
+                var isCreated = true
+                res.render("show", {user: foundUser, isCreated: isCreated});
+               }
+           })
        }
-       res.render("show", {user: foundUser});
+    });
+});
+// User Update Routes
+app.get("/home/:id/edit", function(req, res){
+    User.findById(req.params.id, function(err, foundUser){
+        if(err){
+            req.flash("error", "User Not Found");
+            res.redirect("/");
+        }
+        res.render("editUser", {user: foundUser});
     });
 });
 
-
+app.put("/home/:id", function(req, res) {
+    User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
+        if(err){
+            console.log("Failed the test");
+            req.flash("error", "User Not Found");
+            res.redirect("/");
+        }
+        console.log("Passed the test");
+        res.redirect("/home/" + updatedUser.id);
+    });
+});
 // logout route
 app.get("/logout", function(req, res){
     req.logout();
-    // req.flash("success", "LOGGED YOU OUT!!");
     res.redirect("/");
  });
 
@@ -134,7 +161,7 @@ app.use("/api/workExp", workExpRoutes)
 app.use("/api/project", projectsRoutes)
 
 app.get("/xyz", function(req, res){
-    res.send("sent xyz from app")
+    res.render("defaultwebfolio")
 })
 
 
