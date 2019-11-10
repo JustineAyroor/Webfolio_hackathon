@@ -263,8 +263,8 @@ app.post("/createEducation/:wfID", function(req, res){
 
 // Parser Route
 app.post("/fetch_data/:user_id", function(req, res){
-    console.log(req.body.data)
-    res.redirect("/show")
+    console.log(req.body)
+    res.send(req.body)
 })
 
 app.listen(port, function(){
