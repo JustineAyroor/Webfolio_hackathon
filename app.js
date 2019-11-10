@@ -264,7 +264,8 @@ app.post("/createEducation/:wfID", function(req, res){
 // Parser Route
 app.post("/fetch_data/:user_id", function(req, res){
     console.log(req.body)
-    res.redirect("/fetch_data", {parserObj: req.body, user_id: req.params.user_id})
+    res.render("createFromParse", {parseObj: req.body})
+    // res.redirect("/fetch_data", {parserObj: req.body, user_id: req.params.user_id})
 })
 
 app.get("/fetch_data", function(req, res){
