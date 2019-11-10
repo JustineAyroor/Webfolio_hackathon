@@ -170,9 +170,9 @@ app.get("/show", function(req, res){
     res.render("WfCreate")
 })
 
-app.get("/vinays_data/:id/:parsed_data", function(req, res){
+app.get("/vinays_data/:id", function(req, res){
     console.log(req.params.id)
-    console.log(req.params.parsed_data)
+    console.log(req.body)
     res.send("ok")
 })
 
