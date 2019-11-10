@@ -102,7 +102,7 @@ app.get('/home/:id', function(req, res) {
                 res.render("show", {user: foundUser, isCreated: isCreated});
                }else{
                 var isCreated = true
-                res.render("show", {user: foundUser, isCreated: isCreated,wfid: req.param.wfid});
+                res.render("show", {user: foundUser, isCreated: isCreated,wfid: Wf._id});
                }
            })
        }
@@ -191,6 +191,72 @@ app.use("/api/fonts", fontsRoutes)
 
 app.get("/show", function(req, res){
     res.render("WfCreate")
+})
+
+app.post("/pdCreate", function(req, res){
+    db.User.findById(res.locals.currentUser._id)
+    .then(function(user){
+        db.WebFolio.create({
+            user: user,
+            title: req.body.title,
+            objective: req.body.objective,
+            linkdn: req.body.linkdn,
+            git: req.body.git,
+            basic_wf_styles:{
+                font_body: req.body.font_body,
+                font_title: req.body.font_title,
+                font_header: req.body.font_header,
+                font_quotes: req.body.font_quotes
+            }
+        })
+        .then(function(webFolio){
+            res.redirect("/"+user._id+"/viewWf/"+webFolio._id)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+    })
+    .catch(function(err){
+        console.log(err)
+    })
+})
+
+app.get("/createEducation/:wfID", function(req, res){
+    console.log(req.params.wfID)
+    res.render("createEducation", {wfID: req.params.wfID})
+})
+
+app.post("/createEducation/:wfID", function(req, res){
+    var courses = (req.body.courses).split(",")
+    console.log(req.params.wfID)
+    db.Education.create({
+        name: req.body.name,
+        stDate: req.body.stDate,
+        eDate: req.body.eDate,
+        isCurr: req.body.isCurr,
+        major: req.body.major,
+        gpa: req.body.gpa,
+        courses: courses
+    })
+    .then(function(education){
+        db.WebFolio.findById(req.params.wfID)
+        .then(function(webFolio){
+            webFolio.education.push(education)
+            webFolio.save()
+            .then(function(webFolio){
+                res.redirect("/"+res.locals.currentUser._id+"/viewWf/"+webFolio._id)
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+    })
+    .catch(function(err){
+        console.log(err)
+    })
 })
 
 app.listen(port, function(){
