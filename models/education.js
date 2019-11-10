@@ -10,4 +10,4 @@ var educationScehma = new mongoose.Schema({
     courses: [String]
 })
 
-module.exports = mongoose.model("Education", educationScehma)
+module.exports = mongoose.model("Education",educationScehma)

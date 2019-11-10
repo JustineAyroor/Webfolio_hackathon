@@ -35,4 +35,4 @@ var webFolioSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("WebFolio", webFolioSchema)
+module.exports = mongoose.model("WebFolio",webFolioSchema)

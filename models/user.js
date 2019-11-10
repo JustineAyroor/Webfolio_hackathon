@@ -3,7 +3,7 @@ var passportLocalMongoose = require("passport-local-mongoose");
 
 var UserSchema = new mongoose.Schema({
     username: {type: String, required: "UserName cannot be blank"},
-    password: {type: String, required: "Password cannot be blank"},
+    password: String,
     firstName: {type: String, required: "FirstName cannot be blank"},
     lastName: {type: String, required: "LastName cannot be blank"},
     age: {type: Number, default: 15},
