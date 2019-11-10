@@ -125,7 +125,7 @@ var personalDetailsRoutes = require("./routes/personalDetails")
 var educationRoutes = require("./routes/education")
 var webFolioRoutes = require("./routes/webFolio")
 var workExpRoutes = require("./routes/workExp")
-var projectsRoutes = require("./routes/workExp")
+var projectsRoutes = require("./routes/projects")
 
 app.use("/api/personalDetails", personalDetailsRoutes)
 app.use("/api/webFolio", webFolioRoutes)
