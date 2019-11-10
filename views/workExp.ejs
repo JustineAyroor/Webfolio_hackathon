@@ -1,0 +1,39 @@
+<% include ./partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;" class="bg-dark">
+            <h1 class="text-center text-light">Work Experience Data</h1>
+            <form action="/register" method="POST">
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="name" placeholder="Company Name" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="stDate" placeholder="Start Date in form MM/DD/YYYY" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="eDate" placeholder="End Date in form MM/DD/YYYY" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="isCurr" placeholder="Is this your Current Job" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="jobTitle" placeholder="Whats you Job Title" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="jobDesc" placeholder="Explain Your Job.." required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="techUsed" placeholder="Enter Tech Used at the Job Eg: (Java, Python,etc) ">
+                </div>
+                
+                <div class="form-group mx-1">
+                    <button class="btn btn-lg btn-success btn-block">Add Work Exp!</button>
+                </div>
+            </form>
+            <a href="/" class="btn btn-lg btn-danger btn-block">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/header %>

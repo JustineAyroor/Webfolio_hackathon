@@ -1,0 +1,39 @@
+<% include ./partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;" class="bg-dark">
+            <h1 class="text-center text-light">Education Data</h1>
+            <form action="/register" method="POST">
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="name" placeholder="School/University Name" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="stDate" placeholder="Start Date in form MM/DD/YYYY" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="eDate" placeholder="End Date in form MM/DD/YYYY" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="isCurr" placeholder="Is this your Current School" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="major" placeholder="Whats you Major" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="gpa" placeholder="Gpa??">
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="courses" placeholder="Enter Any Courses taken at the University Eg: (Java, Data Structures,etc) ">
+                </div>
+                
+                <div class="form-group mx-1">
+                    <button class="btn btn-lg btn-success btn-block">Add Education!</button>
+                </div>
+            </form>
+            <a href="/" class="btn btn-lg btn-danger btn-block">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/header %>

@@ -1,0 +1,74 @@
+<% include ./partials/header %>
+<div class="container">
+    <div class="row">
+        <div style="width: 50%; margin: 25px auto;" class="bg-dark">
+            <h1 class="text-center text-light">Update WebFolio</h1>
+            <form action="/api/personalDetails/<%= wfid %>?_method=PUT" method="POST">
+                <hr class="bg-warning">
+                <h3 class="text-white text-center">Basic Info</h3>
+                <hr class="bg-warning">
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="title" value="<%=wf.pDets.title%>" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="objective" value="<%=wf.pDets.objective%>" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="linkdn" value="<%=wf.pDets.linkdn%>" required>
+                </div>
+                <div class="form-group mx-1">
+                    <input class="form-control" type="text" name="git" value="<%=wf.pDets.git%>" required>
+                </div>
+
+                <hr class="bg-warning">
+                <h3 class="text-white text-center">Font Styles</h3>
+                <hr class="bg-warning">
+                <div class></div>
+                <div class="form-group mx-1">
+                    <p id="font_body" class="text-light">Body Font</p>
+                    <select class="form-control" type="text" name="font_body" value="<%= wf.basic_wf_styles.font_body %>" required>
+                    <option value="">--Please choose an option--</option>
+                    <% fonts.forEach(function(font){ %>
+                        <option value="<%=font.name %>"><%= font.name %></option>
+                    <% }) %>
+                    </select>
+                </div>
+                <div class="form-group mx-1">
+                    <p id="font_title" class="text-light">Title Font</p>
+                    <select class="form-control" type="text" name="font_title" value="<%= wf.basic_wf_styles.font_title %>" required>
+                    <option value="">--Please choose an option--</option>
+                    <% fonts.forEach(function(font){ %>
+                        <option value="<%=font.name %>"><%= font.name %></option>
+                    <% }) %>
+                    </select>
+                </div>
+                <div class="form-group mx-1">
+                        <p id="font_header" class="text-light">Header Font</p>
+                        <select class="form-control" type="text" name="font_header" value="<%= wf.basic_wf_styles.font_header %>" required>
+                        <option value="">--Please choose an option--</option>
+                        <% fonts.forEach(function(font){ %>
+                            <option value="<%=font.name %>"><%= font.name %></option>
+                        <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group mx-1">
+                        <p id="font_quotes" class="text-light">Quote Font</p>
+                        <select class="form-control" type="text" name="font_quotes" value="<%= wf.basic_wf_styles.font_quotes %>" required>
+                        <option value="">--Please choose an option--</option>
+                        <% fonts.forEach(function(font){ %>
+                            <option value="<%=font.name %>"><%= font.name %></option>
+                        <% }) %>
+                        </select>
+                    </div>
+        
+                <hr class="bg-warning">
+                <div class="form-group mx-1">
+                    <button class="btn btn-lg btn-success btn-block">Submit</button>
+                </div>
+            </form>
+            <a href="/" class="btn btn-lg btn-danger btn-block">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>
