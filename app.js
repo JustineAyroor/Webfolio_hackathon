@@ -171,8 +171,8 @@ app.get("/show", function(req, res){
 })
 
 app.get("/vinays_data", function(req, res){
-    console.log(req.body.data)
-    res.send(req.body.data)
+    console.log(req.body)
+    res.send(req.body)
 })
 
 app.listen(port, function(){
