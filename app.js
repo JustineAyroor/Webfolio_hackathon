@@ -6,7 +6,6 @@ var methodOverride  = require("method-override")
 var passport        = require("passport")
 var LocalStrategy   = require("passport-local")
 var db              = require("./models")
-var User            = require("./models/user")
 
 var port = process.env.PORT || 4000
 
@@ -22,120 +21,17 @@ app.use(require("express-session")({
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.use(new LocalStrategy(db.User.authenticate()));
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
 
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
    next();
 });
-
+app.use(express.static(__dirname + "/views"));
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
-
-//Landing Route
-app.get("/", function(req, res){
-    res.render("landing");
-});
-
-//Login Route
-app.get("/login", function(req, res){
-    res.render("login");
-});
-
-app.post("/login", passport.authenticate("local", 
-    {
-        successRedirect: "/home",
-        failureRedirect: "/login"
-    }), function(req, res){
-});
-
-
-//Register Route
-app.get("/register", function(req, res){
-    res.render("register");
-});
-
-app.post("/register", function(req, res){
-   var newUser = new User(
-        {
-            username: req.body.username,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName, 
-            email: req.body.email, 
-            age: req.body.age,
-            avatar: req.body.avatar,
-            phone: req.body.phone
-        });
-        console.log(req.body.password)
-    if(req.body.adminCode === 'halkahalka1234'){
-        newUser.isAdmin = true;
-    }
-    User.register(newUser, req.body.password, function(err, user){
-        if(err){
-            console.log(err);
-            return res.render("register", {error: err.message});
-        }
-        passport.authenticate("local")(req, res, function(){
-        //    req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
-           res.redirect("/home"); 
-        });
-    }); 
-});
-
-//Home Route
-app.get("/home", function(req, res){
-    var user_id = res.locals.currentUser.id;
-    console.log(user_id)
-    res.redirect("/home/" + user_id);
-});
-
-app.get('/home/:id', function(req, res) {
-    User.findById(req.params.id, function(err, foundUser){
-       if(err){
-           res.redirect("/");
-       }else{
-           db.WebFolio.findOne({user: req.params.id}, function(err,Wf){
-               if(Wf == undefined){
-                var isCreated = false
-                res.render("show", {user: foundUser, isCreated: isCreated});
-               }else{
-                var isCreated = true
-                res.render("show", {user: foundUser, isCreated: isCreated,wfid: Wf._id});
-               }
-           })
-       }
-    });
-});
-// User Update Routes
-app.get("/home/:id/edit", function(req, res){
-    User.findById(req.params.id, function(err, foundUser){
-        if(err){
-            req.flash("error", "User Not Found");
-            res.redirect("/");
-        }
-        res.render("editUser", {user: foundUser});
-    });
-});
-
-app.put("/home/:id", function(req, res) {
-    User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
-        if(err){
-            console.log("Failed the test");
-            req.flash("error", "User Not Found");
-            res.redirect("/");
-        }
-        console.log("Passed the test");
-        res.redirect("/home/" + updatedUser.id);
-    });
-});
-
-// logout route
-app.get("/logout", function(req, res){
-    req.logout();
-    res.redirect("/");
- });
+app.use(express.static(__dirname + "/public/stylesheets"));
 
  // Add font route
  app.post("/font", function(req, res){
@@ -171,6 +67,8 @@ app.get("/:id/viewWf/:wfID", function(req, res){
 
 
 // routers 
+var indexRoutes = require("./routes/index")
+var userRoutes = require("./routes/user")
 var personalDetailsRoutes = require("./routes/personalDetails")
 var educationRoutes = require("./routes/education")
 var webFolioRoutes = require("./routes/webFolio")
@@ -180,6 +78,8 @@ var tskillRoutes = require("./routes/tskills")
 var certificationRoutes = require("./routes/certifications")
 var fontsRoutes = require("./routes/fonts")
 
+app.use("/", indexRoutes)
+app.use("/home", userRoutes)
 app.use("/api/personalDetails", personalDetailsRoutes)
 app.use("/api/webFolio", webFolioRoutes)
 app.use("/api/education", educationRoutes)
