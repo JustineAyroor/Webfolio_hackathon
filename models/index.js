@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 mongoose.set('debug', true)
 //MongoDB Configuration
-// mongoose.connect('mongodb://justine:justine1234@ds241258.mlab.com:41258/heroku_vcgnwf9w',{useNewUrlParser:true});
+mongoose.connect('mongodb://justine:justine1234@ds241258.mlab.com:41258/heroku_vcgnwf9w',{useNewUrlParser:true});
 mongoose.connect('mongodb://localhost:27017/webfolio',{useNewUrlParser:true});
 mongoose.Promise = Promise; 
 
