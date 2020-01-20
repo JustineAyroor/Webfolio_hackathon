@@ -1,74 +1,43 @@
 <% include ./partials/header %>
 <div class="container">
-    <div class="row">
-        <div style="width: 50%; margin: 25px auto;" class="bg-dark">
-            <h1 class="text-center text-light">Create WebFolio</h1>
-            <form action="/pdCreate" method="POST">
-                <hr class="bg-warning">
-                <h3 class="text-white text-center">Basic Info</h3>
-                <hr class="bg-warning">
-                <div class="form-group mx-1">
-                    <input class="form-control" type="text" name="title" placeholder="title" required>
+    <h1><%=page%></h1>>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Select WebFolio Fields</h1>
+            <hr>
+            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            <div class="container">
+                <div class="d-flex flex-row bg-dark text-center">
+                    <!-- <div class="col-6"> -->
+                        <div class="d-flex flex-column border border-danger my-2 fieldBox" id="included">
+                            <div class="text-white">
+                                <h1>Include</h1>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                    <!-- <div class="col-6"> -->
+                        <div class="d-flex flex-column border border-danger my-2 fieldBox" id="excluded">
+                            <div class="text-white">
+                                <h1>Exclude</h1>
+                            </div>
+                        </div>
+                    <!-- </div> -->
                 </div>
-                <div class="form-group mx-1">
-                    <input class="form-control" type="text" name="objective" placeholder="Objective" required>
-                </div>
-                <div class="form-group mx-1">
-                    <input class="form-control" type="text" name="linkdn" placeholder="Linkedn Link" required>
-                </div>
-                <div class="form-group mx-1">
-                    <input class="form-control" type="text" name="git" placeholder="GitHub Link" required>
-                </div>
-
-                <hr class="bg-warning">
-                <h3 class="text-white text-center">Font Styles</h3>
-                <hr class="bg-warning">
-                <div class></div>
-                <div class="form-group mx-1">
-                    <p id="font_body" class="text-light">Body Font</p>
-                    <select class="form-control" type="text" name="font_body" placeholder="Body Font Styles" required>
-                    <option value="">--Please choose an option--</option>
-                    <% fonts.forEach(function(font){ %>
-                        <option value="<%=font.name %>"><%= font.name %></option>
-                    <% }) %>
-                    </select>
-                </div>
-                <div class="form-group mx-1">
-                    <p id="font_title" class="text-light">Title Font</p>
-                    <select class="form-control" type="text" name="font_title" placeholder="Title Font Style" required>
-                    <option value="">--Please choose an option--</option>
-                    <% fonts.forEach(function(font){ %>
-                        <option value="<%=font.name %>"><%= font.name %></option>
-                    <% }) %>
-                    </select>
-                </div>
-                <div class="form-group mx-1">
-                        <p id="font_header" class="text-light">Header Font</p>
-                        <select class="form-control" type="text" name="font_header" placeholder="Header Font Styles" required>
-                        <option value="">--Please choose an option--</option>
-                        <% fonts.forEach(function(font){ %>
-                            <option value="<%=font.name %>"><%= font.name %></option>
-                        <% }) %>
-                        </select>
-                    </div>
-                    <div class="form-group mx-1">
-                        <p id="font_quotes" class="text-light">Quote Font</p>
-                        <select class="form-control" type="text" name="font_quotes" placeholder="Quotes Font Style" required>
-                        <option value="">--Please choose an option--</option>
-                        <% fonts.forEach(function(font){ %>
-                            <option value="<%=font.name %>"><%= font.name %></option>
-                        <% }) %>
-                        </select>
-                    </div>
-        
-                <hr class="bg-warning">
-                <div class="form-group mx-1">
-                    <button class="btn btn-lg btn-success btn-block">Submit</button>
-                </div>
-            </form>
-            <a href="/" class="btn btn-lg btn-danger btn-block">Go Back</a>
+            </div>
+            
+            <input name="userID" id="userID" type="text" class="d-none" value="<%= user._id %>">
+            <input name="page" id="page" type="text" class="d-none" value="<%= page %>">
+            <div id="actionField">
+                <% if(page == "create"){%>
+                <button id="createWf" class="btn btn-lg btn-success btn-block">Save Fields</button>
+                <%}%>
+                <% if(page == "update"){%>
+                    <button id="updateWf" class="btn btn-lg btn-danger btn-block">Update Fields</button>
+                <%}%>
+            </div>
+            
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="../../../home.js"></script>
 <% include ./partials/footer %>

@@ -1,62 +1,203 @@
 <% include ./partials/header %>
-<div class="container">
-    <div class="jumbotron jumbotron-fluid">
+<input id="uID" class="d-none" value="<%=wf.user._id%>">
+<input id="wfID" class="d-none" value="<%=wf._id%>">
+<div class="container d-flex flex-column">
+    <div class="jumbotron jumbotron-fluid text-center">
+        <h4>Actions</h4>
+        <hr class="bg-danger">
+        <div class="d-flex flex-row justify-content-center">
+            <a class="btn btn-primary btn-lg" href="/webFolio/<%=wf.user._id%>/Wf">Update Fields</a>
+            <button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#BasicInfModal">Update Basic Info</button>
+            <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#StyleModal">Update Styles & Fonts</button>
+            <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#">Update Education</button>
+            
+        </div>
+    </div>
+    <div id="pdets" class="jumbotron text-center">
         <div class="container">
+            <div class="row"><div class="Fimg col-3"></div><div class="col-9"><h1 class="display-6">Basic information</h1></div></div>  
+            <hr class="bg-danger">
             <div class="row">
                 <div class="col-6">
                     <center>
-                        <img src="<%= wf.user.avatar %>" alt="..." class="rounded border border-success" style="height: 20rem;width: 20rem;">
+                        <img src="<%= wf.user.avatar %>" alt="..." class="rounded border border-danger" style="height: 20rem;width: 20rem;">
                         <h1><%= wf.user.firstName + " " + wf.user.lastName %></h1>
                     </center>
                 </div>
                 <div class="col-6">
                     <div class="card text-white text-center bg-danger mb-3" style="max-width: 38rem;height: 20rem;">
-                        <div class="card-header"><h4><%= wf.title %></h4></div>
+                        <div class="card-header"><h4 id="wfTitle"><%= wf.title %></h4></div>
                         <div class="card-body">
-                            <h5 class="card-title"><%= wf.objective %></h5>
-                            <p class="card-text"><a class="btn btn-lg btn-warning m-2" href="<%= wf.linkdn %>"><i class="fab fa-linkedin"></i></a><a class="btn btn-lg btn-warning m-2" href="<%= wf.git %>"><i class="fab fa-github"></i></a></p>
+                            <h5 id="wfObjective" class="card-title"><%= wf.objective %></h5>
+                            <p class="card-text"><a id="wfLinkdn" class="btn btn-lg btn-warning m-2" href="<%= wf.linkdn %>"><i class="fab fa-linkedin"></i></a><a id="wfGit" class="btn btn-lg btn-warning m-2" href="<%= wf.git %>"><i class="fab fa-github"></i></a>Hey mannnnnnnn!!!!</p>
                         </div>
                     </div>
-                    <h3></h3>
+                    <div id="WfStyles" class="row bg-warning m-1 text-center"><div class="fimg col-3"></div><div class="col-9"><h4 class="display-8">Styles & Fonts</h4></div></div>  
                 </div>
             </div>  
-        </div>
-        </div>
-        <div class="jumbotron text-center">
-            <h1 class="display-4">Education</h1>
             <hr class="bg-danger">
-            <div class="d-flex flex-row">
+        </div>
+        </div>
+
+        <div class="modal fade" id="BasicInfModal" tabindex="-1" role="dialog" aria-labelledby="BasicInfLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="BasicInfLabel">Basic Information</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="form-group row">
+                        <label for="title" class="col-sm-4 col-form-label">Title: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="title" name="bInf[title]" value="<%= wf.title %>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="objective" class="col-sm-4 col-form-label">Objective/Quote: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="objective" name="bInf[objective]"  value="<%= wf.objective %>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="linkdn" class="col-sm-4 col-form-label">Linkedn Link: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="linkdn" name="bInf[linkdn]"  value="<%= wf.linkdn %>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="git" class="col-sm-4 col-form-label">GitHub Link: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="git" name="bInf[git]"  value="<%= wf.git %>">
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button id="updateBI" type="button" class="btn btn-danger" data-dismiss="modal">Save changes</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="StyleModal" tabindex="-1" role="dialog" aria-labelledby="StyleLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="StyleLabel">Styles & Fonts</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div id="fontBgPanel" class="form-group row">
+                        <label for="bg_link" class="col-4 col-form-label">Background Img: </label>
+                        <div class="col-8">
+                            <div class="border border-danger" id="SampleBG"><img style="width: 18.6rem;height: 10rem;" src="<%= wf.basic_wf_styles.bg_link %>" alt=""></div>
+                            <input type="text" class="form-control" id="bg_link" name="bSF[bg_link]" value="<%= wf.basic_wf_styles.bg_link %>">
+                        </div>
+                    </div>
+                    <div id="fontBodyPanel" class="form-group row d-none">
+                        <label for="font_body" class="col-4 col-form-label">Font for Body: </label>
+                        <div class="col-8">
+                            <svg id="fontBodySVG" style="border: 1px solid black; width:200px; height:50px">
+                                <text x="50" y="25" font-size="1.5em" font-family="<%= wf.basic_wf_styles.font_body %>">Sample Text</text>
+                            </svg>
+                            <input type="text" class="form-control d-none" id="font_body" name="bSF[font_body]"  value="<%= wf.basic_wf_styles.font_body %>">
+                        </div>
+                    </div>
+                    
+                    <div id="fontTitlePanel" class="form-group row d-none">
+                        <label for="font_title" class="col-4 col-form-label">Font for Title: </label>
+                        <div class="col-8">
+                            <svg id="fontTitleSVG" style="border: 1px solid black; width:200px; height:50px">
+                                <text x="50" y="25" font-size="1.5em" font-family="<%= wf.basic_wf_styles.font_title %>">Sample Text</text>
+                            </svg>
+                        <input type="text" class="form-control d-none" id="font_title" name="bSF[font_title]"  value="<%= wf.basic_wf_styles.font_title %>">
+                        </div>
+                    </div>
+                    <!-- <div id="fontTitlePanel" class="border border-danger m-2 fontPanel justify-content-between"></div> -->
+                    
+                    <div id="fontHeadPanel" class="form-group row d-none">
+                        <label for="font_header" class="col-4 col-form-label">Font for Header: </label>
+                        <div class="col-8">
+                            <svg id="fontHeadSVG" style="border: 1px solid black; width:200px; height:50px">
+                                <text x="50" y="25" font-size="1.5em" font-family="<%= wf.basic_wf_styles.font_header %>">Sample Text</text>
+                            </svg>
+                        <input type="text" class="form-control d-none" id="font_header" name="bSF[font_header]"  value="<%= wf.basic_wf_styles.font_header %>">
+                        </div>
+                    </div>
+                    <!-- <div id="fontHeadPanel" class="border border-danger m-2 fontPanel justify-content-between"></div> -->
+                    
+                    <div id="fontQuotePanel" class="form-group row d-none">
+                        <label for="font_quotes" class="col-4 col-form-label">Font for Quote/Objective: </label>
+                        <div class="col-8">
+                            <svg id="fontQuoteSVG" style="border: 1px solid black; width:200px; height:50px">
+                                <text x="50" y="25" font-size="1.5em" font-family="<%= wf.basic_wf_styles.font_quotes %>">Sample Text</text>
+                            </svg>
+                        <input type="text" class="form-control d-none" id="font_quotes" name="bSF[font_quotes]"  value="<%= wf.basic_wf_styles.font_quotes %>">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row"><button id="next" type="button" value=1 class="btn btn-warning">Next</button></div>
+                    <!-- <div id="fontQuotePanel" class="border border-danger m-2 fontPanel justify-content-between"></div> -->
+                    <div id="fontPanel" class="border border-danger m-2 d-none justify-content-between">
+                        
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button id="updateSF" type="button" class="btn btn-danger" data-dismiss="modal">Save changes</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        <div id="education" class="jumbotron text-center">
+            <div class="row"><div class="Fimg col-3"></div><div class="col-9"><h1 class="display-6">Education</h1></div></div>  
+            <hr class="bg-danger">
+            <div id="eduCardPanel" class="row justify-content-center">
                     <% wf.education.forEach(function(eduDets){ %>
-                    <div class="card border-danger mx-3 text-center" style="width: 30rem;">
-                        <div class="card-header"><%=eduDets.name%></div>
+                    <div id="<%= eduDets._id %>" class="card border-danger m-3 text-center">
+                        <div style="font-size: x-large;" class="card-header"><%=eduDets.name%></div>
                         <div class="card-body text-danger">
                             <% if(eduDets.isCurr){ %>
-                            <h5 class="card-title">Start Date : <%=eduDets.stDate%></h5>
+                            <h6 class="card-title">Present </h6>
                             <% }else{ %>
-                            <p class="card-title">Start Date : <%=eduDets.stDate%></p>
+                            <!-- <p class="card-title">Start Date : <%=eduDets.stDate%></p> -->
                             <p class="card-title">End Date :<%=eduDets.eDate%></p>
                             <% } %>
                             <div class="row">
                                 <div class="col-12">
-                                    <h6 class="card-text">MAJOR : <%=eduDets.major%></h6>
+                                    <h6 class="card-text degree">DEGREE : <%=eduDets.major%></h6>
                                 </div>
                                 <div class="col-12">
-                                    <% if(!eduDets.isCurr){ %>
-                                    <h6 class="card-text">GPA :<%=eduDets.gpa%></h6>
-                                    <% } %>
+                                    <!-- <% if(!eduDets.isCurr){ %> -->
+                                    <h6 class="card-text grade">GPA :<%=eduDets.gpa%></h6>
+                                    <!-- <% } %> -->
                                 </div>
                             </div>
                             <hr class="bg-danger">
-                            <div class="d-flex flex-row justify-content-center">
-                            <% eduDets.courses.forEach(function(cname){%>
-                                <div><span class="badge badge-warning mx-2 my-1"><%=cname%></span></div> 
-                            <%})%>
-                            </div>
-                            <div class = "d-flex flex-row justify-content-center">
-                                <a class="btn btn-xs btn-success m-2" href="#"><i class="fas fa-edit"></i></a>
-                                <form class="delete-form m-2" action="/#/?_method=DELETE" method="POST">
-                                    <button class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                </form>
+                            <!-- <div class="d-flex flex-row m-1 justify-content-center"> -->
+                                <button type="button" class="btn btn-sm btn-warning courseBtn mb-2"><i class="fas fa-eye"> KEY COURSES </i></button>
+                            <!-- </div> -->
+                            <div class="row keyCourses border border-dark d-none justify-content-center">
+                                <% eduDets.courses.forEach(function(cname){%>
+                                    <div><span style="font-size: medium;" class="badge badge-warning mx-2 my-1"><%=cname%></span></div> 
+                                <%})%>
+                            </div>        
+                            <hr class="bg-danger">
+                            <div class = "row justify-content-center">
+                                <button class="btn btn-xs btn-success update-me m-2" data-toggle="modal" data-target="#eduModal"><i class="fas fa-edit"></i></button>
+                                <!-- <form class="delete-form m-2" action="/#/?_method=DELETE" method="POST"> -->
+                                <button class="btn btn-xs btn-danger delete-me m-2"><i class="fas fa-trash-alt"></i></button>
+                                <!-- </form> -->
                             </div>
                         </div>
                     </div>
@@ -65,53 +206,332 @@
             <!-- <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p> -->
             <hr class="my-4 bg-danger">
             <!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> -->
-            <a class="btn btn-primary btn-lg" href="/createEducation/<%=wf._id%>" role="button">Add More</a>
+            <button id="eduModalTrigger" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#AddEduModal">Add Education</button>
         </div>
 
-        <div class="jumbotron text-center">
-            <h1 class="display-4">Work Experience</h1>
-            <hr class="bg-danger">
-            <div class="d-flex flex-row">
-                <% wf.workExp.forEach(function(workExpDets){ %>
-                <div class="card border-danger mx-3 text-center" style="width: 30rem;">
-                    <div class="card-header"><%=workExpDets.name%></div>
-                    <div class="card-body text-danger">
-                        <% if(workExpDets.isCurr){ %>
-                        <h5 class="card-title">Start Date : <%=workExpDets.stDate%></h5>
-                        <% }else{ %>
-                        <p class="card-title">Start Date : <%=workExpDets.stDate%></p>
-                        <p class="card-title">End Date :<%=workExpDets.eDate%></p>
-                        <% } %>
-                        <div class="row">
-                            <div class="col-12">
-                                <h6 class="card-text">Title : <%=workExpDets.jobTitle %></h6>
-                            </div>
-                            <div class="col-12">       
-                                <h6 class="card-text">Desc :<%=workExpDets.jDesc.jobDesc%></h6>
+        <div class="modal fade" id="AddEduModal" tabindex="-1" role="dialog" aria-labelledby="AddEduModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="AddEduModalLabel">Add Education</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="form-group row">
+                        <label for="ename" class="col-sm-4 col-form-label">University Name: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="ename" name="edu[ename]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="emajor" class="col-sm-4 col-form-label">Major: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="emajor" name="edu[emajor]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="eisCurr" class="col-sm-4 col-form-label">is Current?: </label>
+                        <div class="col-sm-8">
+                        <span id="eisCurrBadge" style="width:7rem;" class="badge badge-danger">No</span>
+                        <input id="eisCurrSlider"type="range" min="1" max="2" value="1">
+                        <input type="text" id="eisCurr" class="form-control d-none" name="edu[eisCurr]" value="false">
+                        </div>
+                    </div>
+                    <div class="form-group row eduOpt">
+                        <label for="eDate" class="col-sm-4 col-form-label">Graduation Year: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="eDate" name="edu[eDate]">
+                        </div>
+                    </div>
+                    <div class="form-group row eduOpt">
+                        <label for="egpa" class="col-sm-4 col-form-label">GPA: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="egpa" name="edu[egpa]">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="ecourses" class="col-sm-4 col-form-label">Courses: </label>
+                        <div class="col-sm-8 d-flex flex-row justify-content-between">
+                        <input type="text" class="form-control" style="width: 13rem;" id="ecourses" name="edu[ecourses]">
+                        <button id="addCourse" type="button" class="btn btn-sm btn-dark">Add Course</button>
+                        
+                        </div>
+                    </div>
+                    </form>
+                    <div id="coursePanel" class="justify-content-center m-2 p-1 border border-danger"></div>
+                    
+                </div>
+                <div class="modal-footer">
+                  <button id="addEdu" type="button" class="btn btn-danger" data-dismiss="modal">Save changes</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        
+        <div class="modal fade" id="eduModal" tabindex="-1" role="dialog" aria-labelledby="eduLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="eduLabel">Update Education</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <label for="Uename" class="col-sm-4 col-form-label">University Name: </label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Uename" name="edu[ename]">
                             </div>
                         </div>
-                        <hr class="bg-danger">
-                        <div class="d-flex flex-row justify-content-center">
+                        <div class="form-group row">
+                            <label for="Uemajor" class="col-sm-4 col-form-label">Major: </label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Uemajor" name="edu[emajor]" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="UeisCurr" class="col-sm-4 col-form-label">is Current?: </label>
+                            <div class="col-sm-8">
+                            <span id="UeisCurrBadge" style="width:7rem;" class="badge badge-danger">No</span>
+                            <input id="UeisCurrSlider"type="range" min="1" max="2" value="1">
+                            <input type="text" id="UeisCurr" class="form-control d-none" name="edu[eisCurr]" value="">
+                            </div>
+                        </div>
+                        <div class="form-group row UeduOpt">
+                            <label for="UeDate" class="col-sm-4 col-form-label">Graduation Year: </label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" id="UeDate" name="edu[eDate]">
+                            </div>
+                        </div>
+                        <div class="form-group row UeduOpt">
+                            <label for="Uegpa" class="col-sm-4 col-form-label">GPA: </label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Uegpa" name="edu[egpa]">
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <label for="Uecourses" class="col-sm-4 col-form-label">Courses: </label>
+                            <div class="col-sm-8 d-flex flex-row justify-content-between">
+                            <input type="text" class="form-control" style="width: 13rem;" id="Uecourses" name="edu[ecourses]">
+                            <button id="UpdateCourse" type="button" class="btn btn-sm btn-dark">Add Course</button>
+                            
+                            </div>
+                        </div>
+                        </form>
+                        <div id="updateCoursePanel" class="justify-content-center m-2 p-1 border border-danger"></div>
+                        
+                </div>
+                <div class="modal-footer">
+                  <button id="updateEdu" type="button" class="btn btn-danger" data-dismiss="modal">Save changes</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        
+        <div id="wrkExp" class="jumbotron text-center">
+            <div class="row"><div class="Fimg col-3"></div><div class="col-9"><h1 class="display-6">Work Experience</h1></div></div>  
+            <hr class="bg-danger">
+            <div id="wrkExpPanel" class="d-flex flex-row justify-content-center">
+                <% wf.workExp.forEach(function(workExpDets){ %>
+                <div id="<%= workExpDets._id %>" class="card border-danger mx-3 text-center">
+                    <div style="font-size: x-large;" class="card-header"><%=workExpDets.name%></div>
+                    <div class="card-body text-danger">
+                        <% if(workExpDets.isCurr){ %>
+                        <h5 class="card-title">Present</h5>
+                        <% }else{ %>
+                        <!-- <p class="card-title">Start Date : <%=workExpDets.stDate%></p> -->
+                        <p class="card-title">End Date :<%=workExpDets.eDate%></p>
+                        <% } %>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <h6 class="card-text">Position : <%=workExpDets.jobTitle %></h6>
+                                <hr class="bg-danger">
+                                <button type="button" class="btn btn-sm btn-warning JDescBtn m-2 align-center"><i class="fas fa-eye"> JOB DESCRIPTION </i></button>
+                            </div>
+                        
+                            <div class="wrkExpJDesc d-none col-12"> 
+                                Responsibilities :
+                                <ul class="list-group text-left">
+                                    <% workExpDets.jDesc.jobDesc.forEach(function(jPoint){%>      
+                                    <li class="list-group-item border danger list-group-item-danger card-text"><span class="badge badge-danger">*</span> <%=jPoint%></li>
+                                    <%})%>
+                                </ul>
+                                <hr class="bg-danger">
+                            </div>
+                        </div>
+                        
+                        <div class="row wrkExpTused justify-content-center d-none">
+                        Technology Used :
                         <% workExpDets.jDesc.techUsed.forEach(function(tname){%>
                             <div><span class="badge badge-warning mx-2 my-1"><%=tname%></span></div> 
                         <%})%>
                         </div>
+                        <hr class="bg-danger">
                         <div class = "d-flex flex-row justify-content-center">
-                            <a class="btn btn-xs btn-success m-2" href="#"><i class="fas fa-edit"></i></a>
-                            <form class="delete-form m-2" action="/#/?_method=DELETE" method="POST">
-                                <button class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
-                            </form>
+                            <button class="btn btn-xs btn-success update-me m-2" data-toggle="modal" data-target="#UpdateWrkModal"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-xs btn-danger delete-me m-2"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 </div>
                 <% })%>
             </div>
             <hr class="bg-danger">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Add More</a>
+            <button id="wrkModalTrigger" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#AddWrkModal">Add Work Experience</button>
+            <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Add More</a> -->
         </div>
-    
-        <div class="jumbotron">
-            <h1 class="display-4">Technical Proficiency</h1>
+        
+        <div class="modal fade" id="AddWrkModal" tabindex="-1" role="dialog" aria-labelledby="AddWrkModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="AddWrkModalLabel">Add Job Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="form-group row">
+                        <label for="wname" class="col-sm-4 col-form-label">Company Name: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="wname" name="wrkExp[wname]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="jobTitle" class="col-sm-4 col-form-label">Position: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="jobTitle" name="wrkExp[jobTitle]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="wisCurr" class="col-sm-4 col-form-label">is Current?: </label>
+                        <div class="col-sm-8">
+                        <span id="wisCurrBadge" style="width:7rem;" class="badge badge-danger">No</span>
+                        <input id="wisCurrSlider"type="range" min="1" max="2" value="1">
+                        <input type="text" id="wisCurr" class="form-control d-none" name="wrkExp[wisCurr]" value="false">
+                        </div>
+                    </div>
+                    <div class="form-group row wrkOpt">
+                        <label for="wrkeDate" class="col-sm-4 col-form-label">End Date: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="wrkeDate" name="wrkExp[eDate]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="jobDesc" class="col-sm-4 col-form-label">Description: </label>
+                        <div class="col-sm-8 d-flex flex-row justify-content-between">
+                        <input type="text" class="form-control" style="width: 13rem;" id="jobDesc" name="wrkExp[jobDesc]">
+                        <button id="addJnote" type="button" class="btn btn-sm btn-dark">Add Note</button>
+                        </div>
+                    </div>
+
+                    <div id="jDescPanel" class="d-flex flex-column justify-content-center m-2 p-1 border border-danger"></div>
+
+                    <div class="form-group row">
+                        <label for="techUsed" class="col-sm-4 col-form-label">Tech Used: </label>
+                        <div class="col-sm-8 d-flex flex-row justify-content-between">
+                        <input type="text" class="form-control" style="width: 13rem;" id="techUsed" name="wrkExp[techUsed]">
+                        <button id="addtUsed" type="button" class="btn btn-sm btn-dark">Add Tech</button>
+                        </div>
+                    </div>
+                    </form>
+                    <div id="tUsedPanel" class="justify-content-center m-2 p-1 border border-danger"></div>
+                    
+                </div>
+                <div class="modal-footer">
+                  <button id="addWrk" type="button" class="btn btn-danger" data-dismiss="modal">Save changes</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="UpdateWrkModal" tabindex="-1" role="dialog" aria-labelledby="UpdateWrkModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="UpdateWrkModalLabel">Update Job Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="form-group row">
+                        <label for="Uwname" class="col-sm-4 col-form-label">Company Name: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="Uwname" name="wrkExp[Uwname]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="UjobTitle" class="col-sm-4 col-form-label">Position: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="UjobTitle" name="wrkExp[UjobTitle]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="wisCurr" class="col-sm-4 col-form-label">is Current?: </label>
+                        <div class="col-sm-8">
+                        <span id="UwisCurrBadge" style="width:7rem;" class="badge badge-danger">No</span>
+                        <input id="UwisCurrSlider"type="range" min="1" max="2" value="1">
+                        <input type="text" id="UwisCurr" class="form-control d-none" name="wrkExp[UwisCurr]" value="false">
+                        </div>
+                    </div>
+                    <div class="form-group row UwrkOpt">
+                        <label for="UwrkeDate" class="col-sm-4 col-form-label">End Date: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="UwrkeDate" name="wrkExp[UwrkeDate]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="UjobDesc" class="col-sm-4 col-form-label">Description: </label>
+                        <div class="col-sm-8 d-flex flex-row justify-content-between">
+                        <input type="text" class="form-control" style="width: 13rem;" id="UjobDesc" name="wrkExp[UjobDesc]">
+                        <button id="UaddJnote" type="button" class="btn btn-sm btn-dark">Add Note</button>
+                        </div>
+                    </div>
+
+                    <div id="UjDescPanel" class="d-flex flex-column justify-content-center m-2 p-1 border border-danger"></div>
+
+                    <div class="form-group row">
+                        <label for="UtechUsed" class="col-sm-4 col-form-label">Tech Used: </label>
+                        <div class="col-sm-8 d-flex flex-row justify-content-between">
+                        <input type="text" class="form-control" style="width: 13rem;" id="UtechUsed" name="wrkExp[UtechUsed]">
+                        <button id="updatetUsed" type="button" class="btn btn-sm btn-dark">Add Tech</button>
+                        </div>
+                    </div>
+                    </form>
+                    <div id="UtUsedPanel" class="justify-content-center m-2 p-1 border border-danger"></div>
+                    
+                </div>
+                <div class="modal-footer">
+                  <button id="updateWrk" type="button" class="btn btn-danger" data-dismiss="modal">Save changes</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+        </div>
+
+        
+        
+
+
+        <div id="tskills" class="jumbotron text-center">
+            <div class="row"><div class="Fimg col-3"></div><div class="col-9"><h1 class="display-6">Technical Skills</h1></div></div>  
+            <!-- <h1 class="display-4">Technical Skills</h1> -->
             <hr class="bg-danger">
             
             <div class="d-flex flex-row">
@@ -130,14 +550,15 @@
                     <canvas id="graph" width="400" height="300" style="border:1px solid #000000;"></canvas>
                     <script>
                         var data = []
-                        <% wf.tSkills.forEach(function(skill){ %>
-                            data.push({name: "<%= skill.name %>", level: "<%=skill.level%>"})   
-                        <% }) %> 
+                        // <% wf.tSkills.forEach(function(skill){ %>
+                        wf.tSkills.forEach(function(skill){
+                            data.push({name: "<%= skill.name %>", level: "<%=skill.level%>"})  
+                        })
+                        // <% }) %> 
                         
                         
 
-                        var colors = ["#8B0000", "#FF8C00", "#FFFF00", "#6B8E23" ,
-                        "#008B8B" ,"#483D8B" ,"#4B0082" ,"#C71585" ,"#FFE4E1" ,"#2F4F4F"]
+                        colors = ["#8B0000", "#FF8C00", "#FFFF00", "#6B8E23" ,"#008B8B" ,"#483D8B" ,"#4B0082" ,"#C71585" ,"#FFE4E1" ,"#2F4F4F"];
                         w = 400;
                         h = 300;
 
@@ -189,11 +610,13 @@
                     </script>
                 </div>
             </div>
+            <hr class="bg-danger">
             <a class="btn btn-primary btn-lg" href="#" role="button">Add more</a>
         </div>
 
-        <div class="jumbotron">
-            <h1 class="display-4">Projects</h1>
+        <div id="project" class="jumbotron text-center">
+            <div class="row"><div class="Fimg col-3"></div><div class="col-9"><h1 class="display-6">Projects</h1></div></div>  
+            <!-- <h1 class="display-4">Projects</h1> -->
             <hr class="bg-danger">
             <% wf.project.forEach(function(projectDets){ %>
                 <div class="card border-danger mx-3 text-center" style="width: 30rem;">
@@ -226,7 +649,128 @@
             <hr class="bg-danger">
             <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
         </div>
-            
+
+        <div id="certifications" class="jumbotron text-center">
+            <div class="row"><div class="Fimg col-3"></div><div class="col-9"><h1 class="display-6">Certifications</h1></div></div>  
+            <hr class="bg-danger">
+            <div id="certPanel" class="row justify-content-center">
+            <% wf.certifications.forEach(function(certDets){ %>
+                <div id="<%= certDets._id %>" class="card border-danger m-1 text-center">
+                    <div class="row no-gutters">
+                      <div class="col-md-4">
+                        <img src="<%= certDets.icon %>" style="width: 10rem; height: 10rem;" class="card-img p-1" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= certDets.name %></h5>
+                          <p class="card-text">Organization: <%= certDets.organization %></p>
+                          <p class="card-text"><small class="text-muted"><%= certDets.year %></small></p>
+                          <hr class="bg-danger">
+                          <div class = "d-flex flex-row justify-content-center">
+                            <button class="btn btn-xs btn-success update-me m-2" data-toggle="modal" data-target="#UpdateCertModal"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-xs btn-danger delete-me m-2"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            <% }) %>
+            </div>
+            <hr class="bg-danger">
+            <button class="btn btn-danger btn-lg" role="button" data-toggle="modal" data-target="#AddCertModal">Add Certifications</button>
+        </div> 
+        
+        
+        <div class="modal fade" id="AddCertModal" tabindex="-1" role="dialog" aria-labelledby="AddCertModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="AddCertModalLabel">Add Certification</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="form-group row">
+                        <label for="cname" class="col-sm-4 col-form-label">Certification Name: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cname" name="cert[cname]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="corg" class="col-sm-4 col-form-label">Organization Name: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="corg" name="cert[corg]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cicon" class="col-sm-4 col-form-label">Organization IMG/ICON : </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cicon" name="edu[cicon]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cDate" class="col-sm-4 col-form-label">Completion Date : </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cDate" name="cert[cDate]">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button id="addCert" type="button" class="btn btn-danger" data-dismiss="modal">Save changes</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="UpdateCertModal" tabindex="-1" role="dialog" aria-labelledby="UpdateCertModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="UpdateCertModalLabel">Update Certification</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="form-group row">
+                        <label for="Ucname" class="col-sm-4 col-form-label">Certification Name: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="Ucname" name="cert[Ucname]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Ucorg" class="col-sm-4 col-form-label">Organization Name: </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="Ucorg" name="cert[Ucorg]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Ucicon" class="col-sm-4 col-form-label">Organization IMG/ICON : </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="Ucicon" name="edu[Ucicon]">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="UcDate" class="col-sm-4 col-form-label">Completion Date : </label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="UcDate" name="cert[UcDate]">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button id="updateCert" type="button" class="btn btn-danger" data-dismiss="modal">Save changes</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+        </div>
         
 </div>
+
+<script type="text/javascript" src="../../../webFolio.js"></script>
 <% include ./partials/footer %>

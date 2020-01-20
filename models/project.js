@@ -2,9 +2,11 @@ var mongoose = require('mongoose')
 
 var projectSchema = new mongoose.Schema({
     name: String,
-    stDate: String,
+    techBag: [String],
     eDate: String,
-    desc: String,
+    desc: [String],
+    imgLink: String,
+    showLink: Boolean,
     link: String
 })
 

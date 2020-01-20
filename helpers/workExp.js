@@ -27,8 +27,8 @@ exports.createWebFolioworkExp = function(req, res){
         isCurr: req.body.isCurr,
         jobTitle: req.body.jobTitle,
         jDesc:{
-            jobDesc: req.body.jobDesc,
-            techUsed: req.body.techUsed
+            jobDesc: req.body.jDesc.jobDesc,
+            techUsed: req.body.jDesc.techUsed
         }
     })
     .then(function(workExpDets){

@@ -1,9 +1,14 @@
 var db = require("../models")
 
 exports.certificatesView = function(req, res){
-    db.WebFolio.findById(req.params.id)
+    
+    db.WebFolio.findById(req.params.wfID)
     .then(function(webFolio){
-        res.send(webFolio.certifications)
+        // var foundCert;
+        var foundCert = webFolio.certifications.find(cert => cert._id == req.params.CertID);
+        console.log(foundCert)
+        // console.log(webFolio.certifications.find(cert => cert._id == req.params.CertID));
+        res.send(foundCert)
     })
     .catch(function(err){
         console.log(err)
@@ -11,10 +16,12 @@ exports.certificatesView = function(req, res){
 }
 
 exports.pushCertificate = function(req, res){
-    db.WebFolio.findById(req.params.id)
+    db.WebFolio.findById(req.params.wfID)
     .then(function(webFolio){
         var certificate = {
             name: req.body.name,
+            organization: req.body.organization,
+            icon: req.body.icon,
             year: req.body.year
         }
         webFolio.certifications.push(certificate)
@@ -29,15 +36,17 @@ exports.pushCertificate = function(req, res){
 }
 
 exports.certificatesPut = function(req, res){
-    db.WebFolio.findOneAndUpdate({_id: req.params.id, "certifications.name": req.body.name},
+    db.WebFolio.findOneAndUpdate({_id: req.params.wfID, "certifications._id": req.params.CertID},
     {
         "$set":{
-            "certifications.$.name": req.body.newName,
-            "certifications.$.year": req.body.newYear
+            "certifications.$.name": req.body.name,
+            "certifications.$.organization": req.body.organization,
+            "certifications.$.icon": req.body.icon,
+            "certifications.$.year": req.body.year
         }
     },{new: true})
     .then(function(webFolio){
-        res.send(webFolio.certifications)
+        res.send(webFolio.certifications.find(cert => cert._id == req.params.CertID));
     })
     .catch(function(err){
         console.log(err)
@@ -45,16 +54,12 @@ exports.certificatesPut = function(req, res){
 }
 
 exports.certificatesDelete = function(req, res){
-    db.WebFolio.update({_id: req.params.id},
-        {"$pull":{"certifications": {"name": req.body.name}}}, {safe:true, multi: true})
-    .then(function(){
-        db.WebFolio.findById(req.params.id)
-        .then(function(webFolio){
-            res.send(webFolio.certifications)
-        })
-        .catch(function(err){
-            console.log(err)
-        })
+    db.WebFolio.findById(req.params.wfID)
+    .then(function(webFolio){
+        webFolio.certifications.pull(req.params.CertID)
+        webFolio.save()
+        console.log(webFolio.certifications);
+        res.send(webFolio.certifications)
     })
     .catch(function(err){
         console.log(err)

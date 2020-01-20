@@ -19,16 +19,16 @@ exports.getOneWebFolioEdu = function(req, res){
 }
 
 exports.createWebFolioEdu = function(req, res){
-    var courses = (req.body.courses).split(",")
-    console.log(courses)
+    // var courses = (req.body.courses).split(",")
+    console.log(req.body.courses)
     db.Education.create({
         name: req.body.name,
-        stDate: req.body.stDate,
+        // stDate: req.body.stDate,
         eDate: req.body.eDate,
         isCurr: req.body.isCurr,
         major: req.body.major,
         gpa: req.body.gpa,
-        courses: courses})
+        courses: req.body.courses})
     .then(function(eduDets){
         db.WebFolio.findById(req.params.wfID) 
         .then(function(WFObj){

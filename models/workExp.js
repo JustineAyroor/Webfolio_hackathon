@@ -7,7 +7,7 @@ var workExpSchema = new mongoose.Schema({
     isCurr: Boolean,
     jobTitle: String,
     jDesc:{
-        jobDesc: String,
+        jobDesc: [String],
         techUsed: [String]
     }
 })

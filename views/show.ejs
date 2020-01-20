@@ -34,7 +34,7 @@
             <div class="card-header">Create Your WebFolio</div>
             <div class="card-body">
                 <p> You have 2 Options to build your PortFolio.</p>
-                <a href="/<%= user._id %>/createWf" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="true">Manual</a>
+                <a href="/webFolio/<%= user._id %>/Wf" class="btn btn-success btn-sm" id="manual" tabindex="-1" role="button" aria-disabled="true">Manual</a>
                 <a href="https://res-parser.herokuapp.com/<%= user._id%>" class="btn btn-danger btn-sm" tabindex="-1" role="button" aria-disabled="true">Resume Parser</a>
             </div>
         </div>
@@ -42,9 +42,21 @@
         <div class="card text-center bg-light mb-3" style="max-width: 100%;">
             <div class="card-header">Actions</div>
             <div class="card-body">
-                <a href="/<%= user._id %>/viewWf/<%= wfid %>" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="true">View WebFolio</a>
+                <a href="/webFolio/<%= user._id %>/Wf/<%= wfid %>" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="true">View WebFolio</a>
             </div>
         </div>
     <% } %>
 </div>
+<script type="text/javascript" src="../app.js"></script>
+<!-- <script>
+$('body').click(function(){
+        $.getJSON("/api/webFolio/5e112eb839f0c429d777da17")
+            .then(function(data){
+                console.log(data);
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+    });
+</script> -->
 <% include ./partials/footer.ejs %>

@@ -6,6 +6,8 @@ var webFolioSchema = new mongoose.Schema({
     objective: String,
     linkdn: String,
     git: String,
+    exclude:{type:[{name:String,imgURL:String}], default:[]},
+    include:[{name:String,imgURL:String}],
     education: [{type:mongoose.Schema.ObjectId, ref:"Education"}],
     workExp: [{type:mongoose.Schema.ObjectId, ref:"WorkExp"}],
     project: [{type:mongoose.Schema.ObjectId, ref:"Project"}],
@@ -22,12 +24,14 @@ var webFolioSchema = new mongoose.Schema({
         ],
     certifications: [{
         name: String,
+        organization: String,
+        icon: String,
         year: String
     }],
     basic_wf_styles:{
         bg_link: {
             type: String,
-            default: "https://www.solidbackgrounds.com/images/950x350/950x350-light-blue-solid-color-background.jpg"
+            default: "https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         },
         font_body: String,
         font_title: String,

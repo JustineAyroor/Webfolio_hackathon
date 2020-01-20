@@ -44,32 +44,11 @@ app.use(express.static(__dirname + "/public/stylesheets"));
      })
  })
 
- app.get("/:id/createWf", function(req, res){
-    db.Fonts.find({})
-    .then(function(fonts){
-        res.render("WfCreate", {fonts: fonts})
-    })
-})
-
-app.post("/:id/createWf", function(req, res){
-    res.send("Logic Goes Here")
-})
-
-app.get("/:id/viewWf/:wfID", function(req, res){
-    db.WebFolio.findById(req.params.wfID).populate({path: "user"}).populate({path: "education"}).populate({path: "workExp"}).populate({path: "project"})
-    .then(function(wf){
-        res.render("defaultwebfolio", {wf:wf})
-    })
-    .catch(function(err){
-        console.log(err)
-    })    
-})
-
 
 // routers 
 var indexRoutes = require("./routes/index")
 var userRoutes = require("./routes/user")
-var personalDetailsRoutes = require("./routes/personalDetails")
+// var personalDetailsRoutes = require("./routes/personalDetails")
 var educationRoutes = require("./routes/education")
 var webFolioRoutes = require("./routes/webFolio")
 var workExpRoutes = require("./routes/workExp")
@@ -80,8 +59,9 @@ var fontsRoutes = require("./routes/fonts")
 
 app.use("/", indexRoutes)
 app.use("/home", userRoutes)
-app.use("/api/personalDetails", personalDetailsRoutes)
+// app.use("/api/personalDetails", personalDetailsRoutes)
 app.use("/api/webFolio", webFolioRoutes)
+app.use("/webFolio", webFolioRoutes)
 app.use("/api/education", educationRoutes)
 app.use("/api/workExp", workExpRoutes)
 app.use("/api/project", projectsRoutes)
@@ -89,77 +69,6 @@ app.use("/api/tskill", tskillRoutes)
 app.use("/api/certifications", certificationRoutes)
 app.use("/api/fonts", fontsRoutes)
 
-app.get("/show", function(req, res){
-    res.render("WfCreate")
-})
-
-app.post("/pdCreate", function(req, res){
-    db.User.findById(res.locals.currentUser._id)
-    .then(function(user){
-        db.WebFolio.create({
-            user: user,
-            title: req.body.title,
-            objective: req.body.objective,
-            linkdn: req.body.linkdn,
-            git: req.body.git,
-            basic_wf_styles:{
-                font_body: req.body.font_body,
-                font_title: req.body.font_title,
-                font_header: req.body.font_header,
-                font_quotes: req.body.font_quotes
-            }
-        })
-        .then(function(webFolio){
-            res.redirect("/"+user._id+"/viewWf/"+webFolio._id)
-        })
-        .catch(function(err){
-            console.log(err)
-        })
-    })
-    .catch(function(err){
-        console.log(err)
-    })
-})
-
-
-// Edudcation Route
-app.get("/createEducation/:wfID", function(req, res){
-    console.log(req.params.wfID)
-    res.render("createEducation", {wfID: req.params.wfID})
-})
-
-app.post("/createEducation/:wfID", function(req, res){
-    var courses = (req.body.courses).split(",")
-    console.log(req.params.wfID)
-    db.Education.create({
-        name: req.body.name,
-        stDate: req.body.stDate,
-        eDate: req.body.eDate,
-        isCurr: req.body.isCurr,
-        major: req.body.major,
-        gpa: req.body.gpa,
-        courses: courses
-    })
-    .then(function(education){
-        db.WebFolio.findById(req.params.wfID)
-        .then(function(webFolio){
-            webFolio.education.push(education)
-            webFolio.save()
-            .then(function(webFolio){
-                res.redirect("/"+res.locals.currentUser._id+"/viewWf/"+webFolio._id)
-            })
-            .catch(function(err){
-                console.log(err)
-            })
-        })
-        .catch(function(err){
-            console.log(err)
-        })
-    })
-    .catch(function(err){
-        console.log(err)
-    })
-})
 
 // Parser Route
 app.post("/fetch_data/:user_id", function(req, res){
